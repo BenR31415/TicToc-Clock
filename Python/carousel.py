@@ -7,14 +7,17 @@ class Carousel:
         self.currentSlot = 0
         self.slots = [None] * self.totalSlots
 
-    def isEmpty(self) -> bool:
-        return self.slotsUsed > self.totalSlots
+    def hasSpace(self) -> bool:
+        return self.slotsUsed < self.totalSlots
     
     def addBiscuit(self, time) -> None:
         for i in range(0, self.totalSlots):
             if not self.slots[i]:
                 self.moveTo(i)
+                # push from hopper
                 self.slots[i] = time
+                self.slotsUsed += 1
+                return
 
     def checkTimeInCarousel(self) -> None:
         # get current time in same format as data is being
@@ -28,6 +31,8 @@ class Carousel:
     def dispense(self, slotNo) -> None:
         self.moveTo(slotNo)
         self.pushOut()
+        self.slotsUsed -= 1
+        self.slots[slotNo] = None
 
     def moveTo(self, slotNo) -> None:
         # Move the carousel to accompyaning slot
