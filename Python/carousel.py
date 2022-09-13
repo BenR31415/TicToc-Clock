@@ -36,3 +36,4 @@ class Carousel:
     def pushOut(self) -> None:
         # Push the piston to remove biscuit from carousel at
         # current position
+        pass
